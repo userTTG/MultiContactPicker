@@ -3,10 +3,12 @@ package com.wafflecopter.multicontactpicker;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +58,9 @@ public class MultiContactPickerActivity extends AppCompatActivity implements Mat
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        if (intent == null) return;
+        if (intent == null) {
+            return;
+        }
 
         builder = (MultiContactPicker.Builder) intent.getSerializableExtra("builder");
 
@@ -109,12 +113,14 @@ public class MultiContactPickerActivity extends AppCompatActivity implements Mat
             @Override
             public void onClick(View view) {
                 allSelected = !allSelected;
-                if(adapter != null)
+                if(adapter != null) {
                     adapter.setAllSelected(allSelected);
-                if(allSelected)
+                }
+                if(allSelected) {
                     tvSelectAll.setText(getString(R.string.tv_unselect_all_btn_text));
-                else
+                } else {
                     tvSelectAll.setText(getString(R.string.tv_select_all_btn_text));
+                }
             }
         });
 
@@ -150,14 +156,18 @@ public class MultiContactPickerActivity extends AppCompatActivity implements Mat
         this.animationCloseEnter = builder.animationCloseEnter;
         this.animationCloseExit = builder.animationCloseExit;
 
-        if(builder.bubbleColor != 0)
+        if(builder.bubbleColor != 0) {
             recyclerView.setBubbleColor(builder.bubbleColor);
-        if(builder.handleColor != 0)
+        }
+        if(builder.handleColor != 0) {
             recyclerView.setHandleColor(builder.handleColor);
-        if(builder.bubbleTextColor != 0)
+        }
+        if(builder.bubbleTextColor != 0) {
             recyclerView.setBubbleTextColor(builder.bubbleTextColor);
-        if(builder.trackColor != 0)
+        }
+        if(builder.trackColor != 0) {
             recyclerView.setTrackColor(builder.trackColor);
+        }
         recyclerView.setHideScrollbar(builder.hideScrollbar);
         recyclerView.setTrackVisible(builder.showTrack);
         if(builder.selectionMode == MultiContactPicker.CHOICE_MODE_SINGLE){
